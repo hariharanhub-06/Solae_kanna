@@ -23,11 +23,15 @@ export const SETTING_DEFAULTS: Record<string, string> = {
 export type SettingsMap = Record<string, string>;
 
 export async function getSettings(): Promise<SettingsMap> {
-  const rows = await prisma.setting.findMany();
   const map: SettingsMap = { ...SETTING_DEFAULTS };
-  for (const row of rows) {
-    if (row.value !== "" && row.value != null) map[row.key] = row.value;
-    else if (!(row.key in map)) map[row.key] = row.value;
+  try {
+    const rows = await prisma.setting.findMany();
+    for (const row of rows) {
+      if (row.value !== "" && row.value != null) map[row.key] = row.value;
+      else if (!(row.key in map)) map[row.key] = row.value;
+    }
+  } catch {
+    // DB unavailable (e.g. during build with no DATABASE_URL) — use defaults.
   }
   return map;
 }
@@ -45,8 +49,13 @@ export type ContentMap = Record<
 >;
 
 export async function getContent(): Promise<ContentMap> {
-  const rows = await prisma.contentBlock.findMany();
   const map: ContentMap = {};
+  let rows: Awaited<ReturnType<typeof prisma.contentBlock.findMany>> = [];
+  try {
+    rows = await prisma.contentBlock.findMany();
+  } catch {
+    return map; // DB unavailable during build — render with empty content.
+  }
   for (const row of rows) {
     map[row.key] = {
       heading: row.heading,
