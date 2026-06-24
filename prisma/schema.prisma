@@ -1,0 +1,88 @@
+// Prisma schema for the Solar Company website + admin.
+// Database: Neon Postgres (set DATABASE_URL to the Neon connection string).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Admin / super-admin accounts. role is "SUPERADMIN" or "ADMIN".
+/// Super admins can create/manage ADMIN accounts; admins cannot see super admins.
+model AdminUser {
+  id                 String   @id @default(cuid())
+  email              String   @unique
+  name               String   @default("")
+  passwordHash       String
+  role               String   @default("ADMIN")
+  mustChangePassword Boolean  @default(false)
+  active             Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+/// Site-wide editable settings stored as key/value pairs
+/// (company name, phone, whatsapp number, social links, logo, SEO defaults, ...).
+model Setting {
+  key   String @id
+  value String @default("")
+}
+
+/// Editable text/image blocks for each page section, addressed by a stable key
+/// e.g. "home.hero", "about.story". Lets admins edit page copy + images.
+model ContentBlock {
+  id         String  @id @default(cuid())
+  key        String  @unique
+  page       String
+  label      String  @default("")
+  heading    String  @default("")
+  subheading String  @default("")
+  body       String  @default("")
+  imageUrl   String  @default("")
+  sort       Int     @default(0)
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  summary     String   @default("")
+  description String   @default("")
+  imageUrl    String   @default("")
+  icon        String   @default("")
+  sort        Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  summary     String   @default("")
+  description String   @default("")
+  imageUrl    String   @default("")
+  price       String   @default("")
+  // JSON stored as a string for cross-database portability (sqlite <-> postgres).
+  specs       String   @default("[]")
+  sort        Int      @default(0)
+  published   Boolean  @default(true)
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @default("")
+  phone     String   @default("")
+  message   String   @default("")
+  source    String   @default("website")
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
