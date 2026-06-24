@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isAuthenticated } from "@/lib/auth";
+import { isAuthenticated } from "@/lib/session";
 import { imagekitConfigured, uploadImage } from "@/lib/imagekit";
 
 export const runtime = "nodejs";

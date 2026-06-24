@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { isAuthenticated } from "@/lib/auth";
+import { isAuthenticated } from "@/lib/session";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Name is required").max(120),

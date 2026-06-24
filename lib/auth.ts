@@ -1,5 +1,4 @@
 import { SignJWT, jwtVerify } from "jose";
-import { cookies } from "next/headers";
 
 export const SESSION_COOKIE = "admin_session";
 const ALG = "HS256";
@@ -56,16 +55,6 @@ export async function verifyToken(token: string | undefined): Promise<SessionUse
   } catch {
     return null;
   }
-}
-
-/** Read & verify the session cookie (server components / route handlers). */
-export async function getSessionUser(): Promise<SessionUser | null> {
-  const store = await cookies();
-  return verifyToken(store.get(SESSION_COOKIE)?.value);
-}
-
-export async function isAuthenticated(): Promise<boolean> {
-  return (await getSessionUser()) !== null;
 }
 
 /** Generate a readable temporary password, e.g. "Solar-7K2Q4M". */

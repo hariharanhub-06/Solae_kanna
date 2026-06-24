@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { getSessionUser, generateTempPassword } from "@/lib/auth";
+import { generateTempPassword } from "@/lib/auth";
+import { getSessionUser } from "@/lib/session";
 
 export const runtime = "nodejs";
 

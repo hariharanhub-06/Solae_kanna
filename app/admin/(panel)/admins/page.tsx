@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { getSessionUser } from "@/lib/auth";
+import { getSessionUser } from "@/lib/session";
 import { AdminsManager, type Admin } from "@/components/admin/AdminsManager";
 
 export const dynamic = "force-dynamic";

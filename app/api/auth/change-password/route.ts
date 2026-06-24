@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
-import { getSessionUser, createSessionToken, SESSION_COOKIE } from "@/lib/auth";
+import { createSessionToken, SESSION_COOKIE } from "@/lib/auth";
+import { getSessionUser } from "@/lib/session";
 
 export const runtime = "nodejs";
 

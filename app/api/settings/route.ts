@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { isAuthenticated } from "@/lib/auth";
+import { isAuthenticated } from "@/lib/session";
 
 export async function PUT(req: NextRequest) {
   if (!(await isAuthenticated())) {
