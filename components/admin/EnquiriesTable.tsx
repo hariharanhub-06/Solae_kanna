@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export type Enquiry = {
   id: string;
@@ -16,6 +17,7 @@ export type Enquiry = {
 export function EnquiriesTable({ initial }: { initial: Enquiry[] }) {
   const [items, setItems] = useState<Enquiry[]>(initial);
   const [filter, setFilter] = useState<"all" | "unread">("all");
+  const router = useRouter();
 
   const visible = filter === "unread" ? items.filter((e) => !e.isRead) : items;
 
@@ -27,12 +29,15 @@ export function EnquiriesTable({ initial }: { initial: Enquiry[] }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ isRead }),
     });
+    // Refresh server components so the sidebar unread badge updates immediately.
+    router.refresh();
   }
 
   async function remove(e: Enquiry) {
     if (!confirm(`Delete enquiry from ${e.name}?`)) return;
     setItems((prev) => prev.filter((x) => x.id !== e.id));
     await fetch(`/api/enquiries/${e.id}`, { method: "DELETE" });
+    router.refresh();
   }
 
   return (
