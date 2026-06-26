@@ -32,6 +32,7 @@ export async function POST(req: NextRequest) {
       description: (body.description || "").trim(),
       imageUrl: (body.imageUrl || "").trim(),
       icon: (body.icon || "").trim(),
+      iconUrl: (body.iconUrl || "").trim(),
       published: body.published !== false,
       sort: (max._max.sort ?? -1) + 1,
     },

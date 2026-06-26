@@ -6,6 +6,7 @@ export type ServiceCardData = {
   summary: string;
   imageUrl: string;
   icon: string;
+  iconUrl: string;
 };
 
 export function ServiceCard({ service }: { service: ServiceCardData }) {
@@ -28,7 +29,12 @@ export function ServiceCard({ service }: { service: ServiceCardData }) {
       </div>
       <div className="flex flex-1 flex-col p-5">
         <div className="mb-1 flex items-center gap-2">
-          {service.icon && <span className="text-xl">{service.icon}</span>}
+          {service.iconUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={service.iconUrl} alt="" className="h-6 w-6 object-contain" />
+          ) : service.icon ? (
+            <span className="text-xl">{service.icon}</span>
+          ) : null}
           <h3 className="text-lg font-semibold text-slate-900 group-hover:text-brand-600">
             {service.title}
           </h3>

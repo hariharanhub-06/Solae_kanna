@@ -57,7 +57,12 @@ export default async function ServiceDetailPage({ params }: Params) {
                 />
               )}
               <div className="mt-6 flex items-center gap-3">
-                {service.icon && <span className="text-3xl">{service.icon}</span>}
+                {service.iconUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={service.iconUrl} alt="" className="h-9 w-9 object-contain" />
+                ) : service.icon ? (
+                  <span className="text-3xl">{service.icon}</span>
+                ) : null}
                 <h1 className="text-3xl font-bold text-slate-900">{service.title}</h1>
               </div>
               {service.summary && (
@@ -92,7 +97,12 @@ export default async function ServiceDetailPage({ params }: Params) {
                     href={`/services/${r.slug}`}
                     className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md"
                   >
-                    <div className="text-2xl">{r.icon || "☀"}</div>
+                    {r.iconUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={r.iconUrl} alt="" className="h-8 w-8 object-contain" />
+                    ) : (
+                      <div className="text-2xl">{r.icon || "☀"}</div>
+                    )}
                     <h3 className="mt-2 font-semibold text-slate-900">{r.title}</h3>
                     <p className="mt-1 text-sm text-slate-600">{r.summary}</p>
                   </Link>

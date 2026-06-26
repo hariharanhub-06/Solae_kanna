@@ -13,6 +13,7 @@ export default async function AdminServicesPage() {
     description: r.description,
     imageUrl: r.imageUrl,
     icon: r.icon,
+    iconUrl: r.iconUrl,
     published: r.published,
   }));
 

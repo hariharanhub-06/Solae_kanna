@@ -17,6 +17,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
   if (typeof body.description === "string") data.description = body.description.trim();
   if (typeof body.imageUrl === "string") data.imageUrl = body.imageUrl.trim();
   if (typeof body.icon === "string") data.icon = body.icon.trim();
+  if (typeof body.iconUrl === "string") data.iconUrl = body.iconUrl.trim();
   if (typeof body.published === "boolean") data.published = body.published;
 
   if (data.title === "") {

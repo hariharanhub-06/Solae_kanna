@@ -53,6 +53,7 @@ model Service {
   description String   @default("")
   imageUrl    String   @default("")
   icon        String   @default("")
+  iconUrl     String   @default("")
   sort        Int      @default(0)
   published   Boolean  @default(true)
   createdAt   DateTime @default(now())

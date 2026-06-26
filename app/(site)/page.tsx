@@ -209,7 +209,14 @@ export default async function HomePage() {
               {services.map((s, i) => (
                 <Reveal key={s.id} animation="up" delay={(i % 3) * 90}>
                   <Link href={`/services/${s.slug}`} className="card-shine group flex h-full items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl">
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-100 to-eco-100 text-2xl transition-transform group-hover:scale-110">{s.icon || "🔆"}</div>
+                    <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-brand-100 to-eco-100 text-2xl transition-transform group-hover:scale-110">
+                      {s.iconUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={s.iconUrl} alt="" className="h-8 w-8 object-contain" />
+                      ) : (
+                        s.icon || "🔆"
+                      )}
+                    </div>
                     <div>
                       <h3 className="font-bold text-slate-900 group-hover:text-brand-600">{s.title}</h3>
                       <p className="mt-1 text-sm text-slate-600">{s.summary}</p>

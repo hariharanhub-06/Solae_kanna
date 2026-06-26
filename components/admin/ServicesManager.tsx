@@ -26,6 +26,7 @@ export type Service = {
   description: string;
   imageUrl: string;
   icon: string;
+  iconUrl: string;
   published: boolean;
 };
 
@@ -37,6 +38,7 @@ const EMPTY: Service = {
   description: "",
   imageUrl: "",
   icon: "",
+  iconUrl: "",
   published: true,
 };
 
@@ -73,7 +75,10 @@ function Row({
         ⠿
       </button>
       <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-lg bg-slate-100">
-        {service.imageUrl ? (
+        {service.iconUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={service.iconUrl} alt="" className="h-full w-full object-contain p-1" />
+        ) : service.imageUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={service.imageUrl} alt="" className="h-full w-full object-cover" />
         ) : (
@@ -247,6 +252,11 @@ function ServiceModal({
             <label className="label">Icon (emoji, optional)</label>
             <input className="field" value={form.icon} placeholder="🏠" onChange={(e) => set("icon", e.target.value)} />
           </div>
+          <ImageUploader
+            value={form.iconUrl}
+            onChange={(url) => set("iconUrl", url)}
+            label="Icon / logo image (optional — overrides the emoji)"
+          />
           <div>
             <label className="label">Short Summary</label>
             <input className="field" value={form.summary} onChange={(e) => set("summary", e.target.value)} />
