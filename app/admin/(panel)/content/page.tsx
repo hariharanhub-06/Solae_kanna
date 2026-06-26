@@ -9,6 +9,9 @@ export default async function ContentPage() {
   const rows = await prisma.contentBlock.findMany({ orderBy: { sort: "asc" } });
 
   const blocks: Block[] = rows
+    // Partner logos are now managed in admin → Gallery & Logos, so hide the
+    // legacy per-logo content blocks from the page-content editor.
+    .filter((r) => !/^home\.partner\.\d+$/.test(r.key))
     .map((r) => ({
       key: r.key,
       page: r.page,

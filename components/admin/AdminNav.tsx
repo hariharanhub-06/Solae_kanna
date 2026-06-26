@@ -9,6 +9,7 @@ const BASE_NAV = [
   { href: "/admin/content", label: "Page Content", icon: "📝" },
   { href: "/admin/services", label: "Services", icon: "🛠️" },
   { href: "/admin/products", label: "Products", icon: "🔆" },
+  { href: "/admin/gallery", label: "Gallery & Logos", icon: "🖼️" },
   { href: "/admin/enquiries", label: "Enquiries", icon: "📨" },
   { href: "/admin/settings", label: "Settings", icon: "⚙️" },
 ];

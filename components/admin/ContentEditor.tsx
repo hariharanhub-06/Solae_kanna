@@ -27,9 +27,6 @@ const PAGE_TITLES: Record<string, string> = {
 const IMAGE_BLOCKS = new Set([
   "home.hero",
   "home.about",
-  "home.partner.1",
-  "home.partner.2",
-  "home.partner.3",
   "about.hero",
   "about.story",
   "services.hero",

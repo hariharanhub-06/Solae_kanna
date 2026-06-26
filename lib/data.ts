@@ -77,6 +77,22 @@ export function block(content: ContentMap, key: string) {
   return content[key] ?? { heading: "", subheading: "", body: "", imageUrl: "" };
 }
 
+// ---- Media (partner logos + project gallery), managed from the admin ---------
+
+export type MediaItem = { id: string; title: string; imageUrl: string };
+
+export async function getMedia(category: "partner" | "project"): Promise<MediaItem[]> {
+  try {
+    const rows = await prisma.media.findMany({
+      where: { category, published: true },
+      orderBy: { sort: "asc" },
+    });
+    return rows.map((r) => ({ id: r.id, title: r.title, imageUrl: r.imageUrl }));
+  } catch {
+    return []; // DB unavailable or table not migrated yet — fall back to bundled assets.
+  }
+}
+
 // ---- Product specs are stored as a JSON string ------------------------------
 
 export type Spec = { label: string; value: string };

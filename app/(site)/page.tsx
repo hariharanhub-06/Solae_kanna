@@ -7,7 +7,7 @@ import { Counter } from "@/components/Counter";
 import { SmartImage } from "@/components/SmartImage";
 import { MapEmbed } from "@/components/MapEmbed";
 import { prisma } from "@/lib/prisma";
-import { getContent, block, getSettings } from "@/lib/data";
+import { getContent, block, getSettings, getMedia } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
@@ -20,11 +20,13 @@ const WORKS = Array.from({ length: 9 }, (_, i) => `/work/work-${i + 1}.jpg`);
 const STEP_TINT = ["from-brand-400 to-brand-600", "from-eco-400 to-eco-600", "from-brand-400 to-brand-600", "from-eco-400 to-eco-600"];
 
 export default async function HomePage() {
-  const [content, services, products, settings] = await Promise.all([
+  const [content, services, products, settings, partnerMedia, projectMedia] = await Promise.all([
     getContent(),
     prisma.service.findMany({ where: { published: true }, orderBy: { sort: "asc" }, take: 12 }),
     prisma.product.findMany({ where: { published: true }, orderBy: [{ featured: "desc" }, { sort: "asc" }], take: 4 }),
     getSettings(),
+    getMedia("partner"),
+    getMedia("project"),
   ]);
 
   const hero = block(content, "home.hero");
@@ -36,15 +38,13 @@ export default async function HomePage() {
   const cta = block(content, "home.cta");
   const featureIcons = ["♻️", "🤝", "⚙️", "👷"];
 
-  // Panel partners — editable via content blocks (home.partner.1..6); falls
-  // back to the bundled brand logos if none are set in the admin.
+  // Panel partners + project gallery — managed in admin → Gallery & Logos.
+  // Fall back to the bundled assets if the admin hasn't added any yet.
   const partnersHeading = block(content, "home.partners");
-  const partnerBlocks = [1, 2, 3, 4, 5, 6]
-    .map((n) => block(content, `home.partner.${n}`))
-    .filter((b) => b.imageUrl);
-  const partners = partnerBlocks.length
-    ? partnerBlocks.map((b) => ({ name: b.heading || "Panel partner", src: b.imageUrl }))
+  const partners = partnerMedia.length
+    ? partnerMedia.map((m) => ({ name: m.title || "Panel partner", src: m.imageUrl }))
     : PARTNERS;
+  const works = projectMedia.length ? projectMedia.map((m) => m.imageUrl) : WORKS;
 
   return (
     <>
@@ -250,7 +250,7 @@ export default async function HomePage() {
         <Container>
           <Reveal animation="up"><SectionHeading eyebrow="Our Work" title="Recent Solar Projects" subtitle="A glimpse of installations we've delivered across Pudukkottai and beyond." /></Reveal>
           <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {WORKS.map((src, i) => (
+            {works.map((src, i) => (
               <Reveal key={src} animation="zoom" delay={(i % 4) * 80} className={i % 5 === 0 ? "sm:col-span-2 sm:row-span-2" : ""}>
                 <div className="group relative h-full overflow-hidden rounded-2xl shadow-sm">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

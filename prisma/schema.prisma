@@ -76,6 +76,21 @@ model Product {
   updatedAt   DateTime @updatedAt
 }
 
+// Image collections managed from the admin "Gallery & Logos" section.
+// category: "partner" (panel-brand logos) | "project" (work gallery photos).
+model Media {
+  id        String   @id @default(cuid())
+  category  String   @default("project")
+  title     String   @default("")
+  imageUrl  String   @default("")
+  sort      Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category, sort])
+}
+
 model Enquiry {
   id        String   @id @default(cuid())
   name      String
