@@ -5,9 +5,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Stop sideways swipe from reveal/scale transforms momentarily exceeding
+       the viewport. `clip` (not `hidden`) preserves the sticky header. */
+    overflow-x: clip;
   }
   body {
     @apply bg-white text-slate-700 antialiased;
+    overflow-x: clip;
+    max-width: 100%;
   }
   /* Headings inherit their section's text color, so heroes/CTAs/dark
      bands (which set text-white on the container) render correctly.

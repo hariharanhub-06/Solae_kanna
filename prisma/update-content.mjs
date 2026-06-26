@@ -60,6 +60,11 @@ const blocks = {
   "home.process.4": { page: "home", label: "Step 4", heading: "Switch On & Save", subheading: "", body: "We commission, set up monitoring and you start generating your own clean power.", imageUrl: "" },
   "home.cta": { page: "home", label: "CTA band", heading: "Ready to Switch to Solar?", subheading: "Get a free, no-obligation quote tailored to your roof, load and budget.", body: "", imageUrl: "" },
 
+  "home.partners": { page: "home", label: "Panel partners — heading", heading: "Panels We Install", subheading: "Genuine Tier-1 Modules", body: "We build only with globally trusted, high-efficiency solar panels.", imageUrl: "" },
+  "home.partner.1": { page: "home", label: "Panel partner 1 — logo", heading: "WAAREE", subheading: "", body: "", imageUrl: "/brands/waaree.jpg" },
+  "home.partner.2": { page: "home", label: "Panel partner 2 — logo", heading: "EMMVEE", subheading: "", body: "", imageUrl: "/brands/emmvee.jpg" },
+  "home.partner.3": { page: "home", label: "Panel partner 3 — logo", heading: "Adani Solar", subheading: "", body: "", imageUrl: "/brands/adani.jpg" },
+
   "about.hero": { page: "about", label: "Hero", heading: "About Sri Sastha Solar", subheading: "Powering a sustainable future", body: "", imageUrl: "/work/work-4.jpg" },
   "about.story": { page: "about", label: "Our story", heading: "Our Story", subheading: "", body: "Sri Sastha Solar (a Virgin Power & Engineering initiative) is a leading provider of innovative, sustainable energy solutions — solar power plants, EV charging stations, PV modules, battery storage, solar trackers, lithium batteries, O&M and hybrid projects. We serve homes, businesses, industries and communities with high-quality, reliable and cost-effective clean energy.", imageUrl: "/work/work-7.jpg" },
   "about.mission": { page: "about", label: "Mission", heading: "Our Mission", subheading: "", body: "To deliver high-quality, reliable and cost-effective solutions that drive a cleaner, greener and self-reliant future.", imageUrl: "" },

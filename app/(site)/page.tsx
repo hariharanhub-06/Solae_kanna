@@ -36,6 +36,16 @@ export default async function HomePage() {
   const cta = block(content, "home.cta");
   const featureIcons = ["♻️", "🤝", "⚙️", "👷"];
 
+  // Panel partners — editable via content blocks (home.partner.1..6); falls
+  // back to the bundled brand logos if none are set in the admin.
+  const partnersHeading = block(content, "home.partners");
+  const partnerBlocks = [1, 2, 3, 4, 5, 6]
+    .map((n) => block(content, `home.partner.${n}`))
+    .filter((b) => b.imageUrl);
+  const partners = partnerBlocks.length
+    ? partnerBlocks.map((b) => ({ name: b.heading || "Panel partner", src: b.imageUrl }))
+    : PARTNERS;
+
   return (
     <>
       {/* ─────────────── HERO ─────────────── */}
@@ -165,12 +175,16 @@ export default async function HomePage() {
       <section className="section">
         <Container>
           <Reveal animation="up">
-            <SectionHeading eyebrow="Genuine Tier-1 Modules" title="Panels We Install" subtitle="We build only with globally trusted, high-efficiency solar panels." />
+            <SectionHeading
+              eyebrow={partnersHeading.subheading || "Genuine Tier-1 Modules"}
+              title={partnersHeading.heading || "Panels We Install"}
+              subtitle={partnersHeading.body || "We build only with globally trusted, high-efficiency solar panels."}
+            />
           </Reveal>
           <Reveal animation="fade" delay={120}>
             <div className="marquee mt-10 rounded-3xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 py-8">
               <div className="marquee-track gap-16 px-8">
-                {[...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS].map((p, i) => (
+                {[...partners, ...partners, ...partners, ...partners].map((p, i) => (
                   <SmartImage
                     key={i}
                     src={p.src}

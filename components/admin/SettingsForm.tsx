@@ -19,11 +19,14 @@ const SECTIONS: { title: string; fields: Field[] }[] = [
   {
     title: "Contact Details",
     fields: [
-      { key: "phone", label: "Phone Number", placeholder: "+91 98765 43210" },
+      { key: "phone", label: "Phone Number 1", placeholder: "9176444114" },
+      { key: "phone2", label: "Phone Number 2 (optional)", placeholder: "8838075327" },
+      { key: "phone3", label: "Phone Number 3 (optional)", placeholder: "7904202501" },
       { key: "whatsapp", label: "WhatsApp Number (with country code, digits only)", placeholder: "919876543210" },
       { key: "email", label: "Email Address", placeholder: "info@example.com" },
       { key: "address", label: "Address", type: "textarea" },
-      { key: "mapEmbed", label: "Google Maps Embed Code (optional <iframe>)", type: "textarea" },
+      { key: "mapEmbed", label: "Google Maps Embed (full <iframe> code or embed URL)", type: "textarea" },
+      { key: "mapDirections", label: "Get Directions Link (Google Maps share URL)", placeholder: "https://goo.gl/maps/..." },
     ],
   },
   {

@@ -21,8 +21,25 @@ const PAGE_TITLES: Record<string, string> = {
   contact: "Contact Page",
 };
 
+// Only these blocks actually render an image on the site. Every other block
+// (features, process steps, CTA, mission/vision, why-us, etc.) is text-only,
+// so we hide the image uploader for them to avoid confusion.
+const IMAGE_BLOCKS = new Set([
+  "home.hero",
+  "home.about",
+  "home.partner.1",
+  "home.partner.2",
+  "home.partner.3",
+  "about.hero",
+  "about.story",
+  "services.hero",
+  "products.hero",
+  "contact.hero",
+]);
+
 function BlockCard({ block }: { block: Block }) {
   const [form, setForm] = useState(block);
+  const showImage = IMAGE_BLOCKS.has(block.key);
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [error, setError] = useState("");
 
@@ -77,7 +94,9 @@ function BlockCard({ block }: { block: Block }) {
             onChange={(e) => set("body", e.target.value)}
           />
         </div>
-        <ImageUploader value={form.imageUrl} onChange={(url) => set("imageUrl", url)} label="Image (optional)" />
+        {showImage && (
+          <ImageUploader value={form.imageUrl} onChange={(url) => set("imageUrl", url)} label="Image (optional)" />
+        )}
       </div>
       <div className="mt-4 flex items-center gap-3">
         <button type="button" onClick={save} disabled={status === "saving"} className="btn-primary !py-2 !text-xs">
