@@ -64,7 +64,7 @@ export default async function ProductDetailPage({ params }: Params) {
 
             {/* Details */}
             <div>
-              <h1 className="text-3xl font-bold">{product.title}</h1>
+              <h1 className="text-3xl font-bold text-slate-900">{product.title}</h1>
               {product.summary && <p className="mt-2 text-lg text-slate-600">{product.summary}</p>}
               {product.price && (
                 <p className="mt-4 inline-block rounded-lg bg-eco-50 px-4 py-2 text-lg font-semibold text-eco-700">
@@ -101,7 +101,7 @@ export default async function ProductDetailPage({ params }: Params) {
           <div className="mt-14 rounded-3xl bg-slate-50 p-8">
             <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
               <div>
-                <h2 className="text-2xl font-bold">Get a Quote for {product.title}</h2>
+                <h2 className="text-2xl font-bold text-slate-900">Get a Quote for {product.title}</h2>
                 <p className="mt-2 text-slate-600">
                   Share your details and our team will send you pricing and availability.
                 </p>
@@ -114,7 +114,7 @@ export default async function ProductDetailPage({ params }: Params) {
 
           {related.length > 0 && (
             <div className="mt-16">
-              <h2 className="text-xl font-bold">Related Products</h2>
+              <h2 className="text-xl font-bold text-slate-900">Related Products</h2>
               <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {related.map((r) => (
                   <Link

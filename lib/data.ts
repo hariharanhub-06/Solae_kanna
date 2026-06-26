@@ -3,21 +3,26 @@ import { prisma } from "./prisma";
 // ---- Site settings (key/value) ----------------------------------------------
 
 export const SETTING_DEFAULTS: Record<string, string> = {
-  companyName: "SunVolt Solar",
-  tagline: "Powering Your Future with Clean Solar Energy",
-  phone: "+91 98765 43210",
-  whatsapp: "919876543210", // digits only, with country code, no +
-  email: "info@sunvoltsolar.com",
-  address: "123 Solar Street, Green Park, Bengaluru, Karnataka 560001",
-  mapEmbed: "",
+  companyName: "Sri Sastha Solar",
+  tagline: "Powering a Sustainable Future",
+  phone: "9176444114",
+  phone2: "8838075327",
+  phone3: "7904202501",
+  whatsapp: "919176444114", // digits only, with country code, no +
+  email: "kamalakannan632004@gmail.com",
+  address: "No-5105, Arimalam Road, Near Ram Theatre, Pudukkottai - 622003",
+  mapEmbed:
+    "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3924.767064747539!2d78.81020107503606!3d10.360500989764112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTDCsDIxJzM3LjgiTiA3OMKwNDgnNDYuMCJF!5e0!3m2!1sen!2sin!4v1782458276498!5m2!1sen!2sin",
+  mapDirections: "https://goo.gl/maps/oohcWSZNpLTJgzoM8?g_st=aw",
   facebook: "",
   instagram: "",
   linkedin: "",
   youtube: "",
-  logoUrl: "",
-  metaTitle: "SunVolt Solar — Solar Panel Installation & Solar Products",
+  logoUrl: "/logo.png",
+  metaTitle:
+    "Sri Sastha Solar — Solar Panels, EV Charging & Renewable Energy in Pudukkottai",
   metaDescription:
-    "SunVolt Solar designs, supplies and installs rooftop and commercial solar power systems. Explore our solar services and products, and get a free quote.",
+    "Sri Sastha Solar (Pudukkottai) installs on-grid, off-grid & hybrid rooftop solar, EV charging stations, solar water heaters, pumps, street lights, BESS and more — using WAAREE, EMMVEE & Adani panels. Free site survey & quote.",
 };
 
 export type SettingsMap = Record<string, string>;

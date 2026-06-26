@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import { MapEmbed } from "@/components/MapEmbed";
 import { getContent, getSettings, block } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -23,6 +24,18 @@ export default async function ContactPage() {
       label: "Call Us",
       value: settings.phone,
       href: `tel:${settings.phone.replace(/\s+/g, "")}`,
+    },
+    settings.phone2 && {
+      icon: "📞",
+      label: "Call Us",
+      value: settings.phone2,
+      href: `tel:${settings.phone2.replace(/\s+/g, "")}`,
+    },
+    settings.phone3 && {
+      icon: "📞",
+      label: "Call Us",
+      value: settings.phone3,
+      href: `tel:${settings.phone3.replace(/\s+/g, "")}`,
     },
     settings.email && {
       icon: "✉️",
@@ -46,14 +59,14 @@ export default async function ContactPage() {
 
   return (
     <>
-      <PageHero heading={hero.heading} subheading={hero.subheading} />
+      <PageHero eyebrow="Get In Touch" heading={hero.heading} subheading={hero.subheading} imageUrl={hero.imageUrl} />
 
       <section className="section">
         <Container>
           <div className="grid gap-10 lg:grid-cols-2">
             {/* Info */}
             <div>
-              <h2 className="text-2xl font-bold">Let&apos;s talk solar</h2>
+              <h2 className="text-2xl font-bold text-slate-900">Let&apos;s talk solar</h2>
               <p className="mt-2 text-slate-600">
                 Reach out through any of the channels below, or fill in the form and we&apos;ll
                 get back to you as soon as possible.
@@ -67,7 +80,7 @@ export default async function ContactPage() {
                       <div className="mt-2 text-sm font-semibold uppercase tracking-wider text-slate-400">
                         {item.label}
                       </div>
-                      <div className="mt-1 font-medium text-slate-900">{item.value}</div>
+                      <div className="mt-1 break-words font-medium text-slate-900">{item.value}</div>
                     </>
                   );
                   return item.href ? (
@@ -93,10 +106,7 @@ export default async function ContactPage() {
 
               {settings.mapEmbed && (
                 <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200">
-                  <div
-                    className="aspect-video w-full [&>iframe]:h-full [&>iframe]:w-full"
-                    dangerouslySetInnerHTML={{ __html: settings.mapEmbed }}
-                  />
+                  <MapEmbed embed={settings.mapEmbed} className="aspect-video w-full" />
                 </div>
               )}
             </div>

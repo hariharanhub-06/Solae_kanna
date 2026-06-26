@@ -72,12 +72,15 @@ export function SiteFooter({ settings }: { settings: SettingsMap }) {
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
               {settings.address && <li>📍 {settings.address}</li>}
-              {settings.phone && (
-                <li>
-                  📞{" "}
-                  <a href={`tel:${settings.phone.replace(/\s+/g, "")}`} className="hover:text-brand-400">
-                    {settings.phone}
-                  </a>
+              {[settings.phone, settings.phone2, settings.phone3].filter(Boolean).length > 0 && (
+                <li className="flex flex-wrap items-center gap-x-2">
+                  <span>📞</span>
+                  {[settings.phone, settings.phone2, settings.phone3].filter(Boolean).map((p, i, arr) => (
+                    <span key={p}>
+                      <a href={`tel:${p.replace(/\s+/g, "")}`} className="hover:text-brand-400">{p}</a>
+                      {i < arr.length - 1 ? " · " : ""}
+                    </span>
+                  ))}
                 </li>
               )}
               {settings.email && (

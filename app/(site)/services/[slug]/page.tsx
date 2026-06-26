@@ -58,7 +58,7 @@ export default async function ServiceDetailPage({ params }: Params) {
               )}
               <div className="mt-6 flex items-center gap-3">
                 {service.icon && <span className="text-3xl">{service.icon}</span>}
-                <h1 className="text-3xl font-bold">{service.title}</h1>
+                <h1 className="text-3xl font-bold text-slate-900">{service.title}</h1>
               </div>
               {service.summary && (
                 <p className="mt-3 text-lg text-slate-600">{service.summary}</p>
@@ -84,7 +84,7 @@ export default async function ServiceDetailPage({ params }: Params) {
 
           {related.length > 0 && (
             <div className="mt-16">
-              <h2 className="text-xl font-bold">Other Services</h2>
+              <h2 className="text-xl font-bold text-slate-900">Other Services</h2>
               <div className="mt-6 grid gap-6 sm:grid-cols-3">
                 {related.map((r) => (
                   <Link

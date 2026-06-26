@@ -17,11 +17,21 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${s.companyName}`,
     },
     description: s.metaDescription,
+    keywords: [
+      "solar Pudukkottai", "solar panel installation Pudukkottai", "Sri Sastha Solar",
+      "rooftop solar Tamil Nadu", "on grid off grid hybrid solar", "EV charging station Pudukkottai",
+      "solar water heater", "solar water pump", "solar street lights", "BESS battery storage",
+      "WAAREE EMMVEE Adani solar dealer", "solar inverter", "renewable energy Pudukkottai",
+    ],
+    alternates: { canonical: "/" },
     openGraph: {
       title: s.metaTitle || s.companyName,
       description: s.metaDescription,
       type: "website",
+      locale: "en_IN",
+      siteName: s.companyName,
     },
+    twitter: { card: "summary_large_image", title: s.metaTitle || s.companyName, description: s.metaDescription },
     metadataBase: process.env.SITE_URL ? new URL(process.env.SITE_URL) : undefined,
   };
 }
