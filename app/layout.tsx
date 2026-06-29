@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { getSettings } from "@/lib/data";
+import { isSiteEnabled } from "@/lib/siteStatus";
+import SiteDisabledScreen from "@/components/SiteDisabledScreen";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -36,12 +38,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // Central kill-switch: when the admin disables this site from the Platform Hub,
+  // every page (customer + admin) shows a 403 screen. Fails open on hub errors.
+  const enabled = await isSiteEnabled();
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        {enabled ? children : <SiteDisabledScreen />}
+      </body>
     </html>
   );
 }
