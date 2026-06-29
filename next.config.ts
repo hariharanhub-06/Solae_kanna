@@ -17,7 +17,9 @@ const csp = [
   "connect-src 'self'",
   "frame-src 'self' https://www.google.com",
   "form-action 'self'",
-  "frame-ancestors 'self' https://hariharanhub.com",
+  // Who may embed /admin in an iframe: the Platform Hub. Cover the apex domain,
+  // any subdomain (www.*), and localhost for hub local dev.
+  "frame-ancestors 'self' https://hariharanhub.com https://*.hariharanhub.com http://localhost:3000 http://localhost:3001",
 ].join("; ");
 
 // Headers shared by every route.
